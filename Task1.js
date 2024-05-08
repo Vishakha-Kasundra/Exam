@@ -1,41 +1,29 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 export default function Task1() {
-
-    const [myData, setData] = useState([]);
-    const [filtered, setFilteredData] = useState([]);
-    useEffect(() => {
-        let fetchres = fetch("https://dummyjson.com/products");
-        fetchres.then(res => res.json()).then
-            (data => {
-                setData(data.products);
-            })
-    }, [])
-    console.log(myData);
-
-    useEffect(() => {
-        setFilteredData(myData)
-    }, [myData])
-
-    const filter = () => {
-        const filtered = myData.filter(visu => visu.id === 1);
-        setFilteredData(filtered);
-    };
-
+    const [Name, setName] = useState([]);
+    const [City, setCity] = useState([]);
+    const [Date, setDate] = useState([]);
 
     return (
         <>
             <div>
-                <button onClick={filter}>userId</button>
+                <form>
+                    <labe>Name:</labe>
+                    <input type='text' name='Name' onChange={(e) => setName(e.target.value)}></input><br /><br />
+                    <labe>City:</labe>
+                    <input type='text' name='City' onChange={(e) => setCity(e.target.value)}></input><br /><br />
+                    <labe>Date:</labe>
+                    <input type='Date' name='Date' onChange={(e) => setDate(e.target.value)}></input><br /><br />
+                    <button type='submit'>Submit</button>
+                </form>
             </div>
-            <div className='row'>
-                {filtered.map(visu =>
-                    <div key={visu.id} style={{ border: "1px solid black", margin: "5%", padding: "-5%", height: "10%", width: "50%", marginLeft: "190px" }}>
-                        <p>userId: {visu.id}</p>
-                        <p>Title: {visu.title}</p>
-
-                    </div>
-                )}
+            <div style={{ backgroundColor: City === "Rajkot" ? "pink" : "blue" }}>
+                <div style={{ border: "1px solid black", marginTop: "10px", height: "10%", width: "10%", marginLeft: "550px" }}>
+                    <p>{`${Name}`}</p>
+                    <p>{`${City}`}</p>
+                    <p>{`${Date}`}</p>
+                </div>
             </div>
         </>
     )
